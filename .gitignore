@@ -1,0 +1,46 @@
+_build/
+data*
+results*
+logs*
+_issues.ipynb
+*/figures/*
+figures/*
+data/*
+write/*
+
+*.egg-info/
+.pytest_cache/
+.coverage
+cache/
+coverage.xml
+test.h5ad
+test_compr.h5ad
+test_no_compr.h5ad
+docs/_build
+archive/
+data/
+README.html
+scripts/
+test_notebooks.txt
+upload_to_pypi.sh
+
+
+# always-ignore extensions
+*~
+
+# Python / Byte-compiled / optimized / DLL
+__pycache__/
+*.py[cod]
+*.so
+.cache
+
+# OS or Editor files and folders
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+.directory
+/.idea/
+
+# always-ignore directories
+/dist/
+/build/
