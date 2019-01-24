@@ -1,6 +1,7 @@
+from datetime import datetime
 project = 'Scanpy'
-copyright = '2018, Scanpy authors'
 author = 'Scanpy authors'
+copyright = f'{datetime.now():%Y}, {author}.'
 
 version = ''
 release = version
@@ -34,3 +35,11 @@ html_static_path = ['_static']
 def setup(app):
     app.add_stylesheet('css/custom.css')
 
+# -- Strip output ----------------------------------------------
+
+import nbclean, glob
+
+for filename in glob.glob('**/*.ipynb', recursive=True):
+    ntbk = nbclean.NotebookCleaner(filename)
+    ntbk.clear('stderr')
+    ntbk.save(filename)
