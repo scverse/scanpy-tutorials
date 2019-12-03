@@ -1,4 +1,5 @@
-.rst-content img {
-    max-width: 100%;
-    zoom: 50%;
-}
+/* ReadTheDocs theme colors */
+
+.wy-nav-top { background-color: #f07e44 }
+.wy-side-nav-search { background-color: transparent }
+.wy-side-nav-search input[type="text"] { border-width: 0 }
