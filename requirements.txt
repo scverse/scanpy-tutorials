@@ -1,4 +1,4 @@
 sphinx>=1.4
 ipykernel
-nbsphinx==0.3.5
+nbsphinx>=0.4
 nbclean
