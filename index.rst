@@ -7,3 +7,4 @@
    pbmc3k
    paga-paul15
    visualizing-marker-genes
+   integrating-pbmcs-using-ingest
