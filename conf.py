@@ -1,6 +1,6 @@
 from datetime import datetime
 project = 'Scanpy'
-author = 'Alex Wolf, Fidel Ramirez'
+author = 'Alex Wolf, Fidel Ramirez, Sergei Rybakov'
 copyright = f'{datetime.now():%Y}, {author}.'
 
 version = ''
@@ -21,7 +21,7 @@ pygments_style = 'sphinx'
 
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = dict(
-    navigation_depth=2,
+    navigation_depth=2, logo_only=True  # Only show the logo
 )
 html_context = dict(
     display_github=True,      # Integrate GitHub
