@@ -31,6 +31,8 @@ html_context = dict(
     conf_py_path='/',    # Path in the checkout to the docs root
 )
 html_static_path = ['_static']
+html_show_sphinx = False
+html_logo = '_static/img/Scanpy_Logo_BrightFG.svg'
 
 def setup(app):
     app.add_stylesheet('css/custom.css')

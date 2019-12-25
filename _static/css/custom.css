@@ -1,5 +1,8 @@
 /* ReadTheDocs theme colors */
 
 .wy-nav-top { background-color: #f07e44 }
+.wy-nav-content {
+    max-width: 1200px;
+}
 .wy-side-nav-search { background-color: transparent }
 .wy-side-nav-search input[type="text"] { border-width: 0 }
