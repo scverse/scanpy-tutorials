@@ -1,7 +1,7 @@
 from datetime import datetime
 project = 'Scanpy'
 author = 'Alex Wolf, Fidel Ramirez, Sergei Rybakov'
-copyright = f'{datetime.now():%Y}, {author}.'
+copyright = f'{datetime.now():%Y}, {author}'
 
 version = ''
 release = version
