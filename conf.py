@@ -21,7 +21,7 @@ pygments_style = 'sphinx'
 
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = dict(
-    navigation_depth=2, logo_only=True  # Only show the logo
+    navigation_depth=4, logo_only=True  # Only show the logo
 )
 html_context = dict(
     display_github=True,      # Integrate GitHub
