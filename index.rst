@@ -9,4 +9,5 @@
    paga-paul15
    visualizing-marker-genes
    integrating-data-using-ingest
-   analysis-visualization-spatial
+   spatial/basic-visualization
+   spatial/integration-scanoroma
