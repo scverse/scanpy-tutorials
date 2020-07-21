@@ -10,4 +10,4 @@
    integrating-data-using-ingest
    spatial/basic-analysis
    spatial/integration-scanorama
-   cite-seq/pbmc5k
+..   cite-seq/pbmc5k
