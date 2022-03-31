@@ -14,7 +14,7 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
 language = None
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints', 'scanpy_workshop/*']
 pygments_style = 'sphinx'
 
 # -- Options for HTML output ----------------------------------------------
