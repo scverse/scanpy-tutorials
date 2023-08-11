@@ -7,6 +7,7 @@
    pbmc3k
    paga-paul15
    plotting/core
+   plotting/advanced
    integrating-data-using-ingest
    spatial/basic-analysis
    spatial/integration-scanorama
