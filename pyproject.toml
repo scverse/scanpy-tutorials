@@ -12,6 +12,8 @@ dependencies = [
     "nbsphinx>=0.4",
     "nbclean",
     "sphinx-book-theme",
+    # see https://github.com/scverse/cookiecutter-scverse/pull/205
+    "docutils>=0.8,!=0.18.*,!=0.19.*",
 ]
 
 [tool.hatch.version]
