@@ -1,0 +1,29 @@
+[project]
+name = "scanpy-tutorials"
+dynamic = ["version"]
+authors = [
+    { name = "Alex Wolf" },
+    { name = "Fidel Ramirez" },
+    { name = "Sergei Rybakov" },
+]
+requires-python = ">=3.9"
+dependencies = [
+    "sphinx>=1.4",
+    "nbsphinx>=0.4",
+    "nbclean",
+    "sphinx-book-theme",
+    # see https://github.com/scverse/cookiecutter-scverse/pull/205
+    "docutils>=0.8,!=0.18.*,!=0.19.*",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.envs.default]
+python = "3.11"
+[tool.hatch.envs.default.scripts]
+build = "sphinx-build -M html . ./_build"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling", "hatch-vcs"]
