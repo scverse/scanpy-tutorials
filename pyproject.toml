@@ -27,6 +27,14 @@ python = "3.11"
 [tool.hatch.envs.default.scripts]
 build = "sphinx-build -M html . ./_build"
 
+[tool.ruff]
+extend-exclude = ["scanpy_workshop/"]
+[tool.ruff.lint]
+ignore = [
+    "F821",  # R cells can sometimes define variables
+    "E741",  # Fonts these days don’t display I and l in a confusable way
+]
+
 [build-system]
 build-backend = "hatchling.build"
 requires = ["hatchling", "hatch-vcs"]
