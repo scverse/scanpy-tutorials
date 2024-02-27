@@ -6,4 +6,9 @@
 
    pbmc3k
    paga-paul15
-   visualizing-marker-genes
+   plotting/core
+   plotting/advanced
+   integrating-data-using-ingest
+   spatial/basic-analysis
+   spatial/integration-scanorama
+..   cite-seq/pbmc5k
