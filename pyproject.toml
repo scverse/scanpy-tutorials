@@ -8,12 +8,9 @@ authors = [
 ]
 requires-python = ">=3.9"
 dependencies = [
-    "sphinx>=1.4",
-    "nbsphinx>=0.4",
-    "nbclean",
-    "sphinx-book-theme>=1.1",
-    # see https://github.com/scverse/cookiecutter-scverse/pull/205
-    "docutils>=0.8,!=0.18.*,!=0.19.*",
+    "sphinx",
+    "myst-nb",
+    "scanpydoc[theme]>=0.13.4",
 ]
 
 [tool.hatch.version]
@@ -23,7 +20,7 @@ source = "vcs"
 bypass-selection = true  # This is not a package
 
 [tool.hatch.envs.default]
-python = "3.11"
+python = "3.12"
 [tool.hatch.envs.default.scripts]
 build = "sphinx-build -M html . ./_build"
 
