@@ -52,6 +52,10 @@ render_image_orig = NbElementRenderer.render_image
 
 
 def render_image(self: NbElementRenderer, data: MimeData) -> list[nodes.Element]:
+    """Makes images display size default to their jupyter setting.
+    
+    Workaround for: https://github.com/executablebooks/MyST-NB/issues/522
+    """
     node_list = render_image_orig(self, data)
     try:
         [image] = node_list
