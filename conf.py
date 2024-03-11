@@ -40,5 +40,6 @@ html_logo = "_static/img/Scanpy_Logo_BrightFG.svg"
 
 # -- Notebook settings ----------------------------------------------------
 
+nb_execution_mode = "off"
 nb_output_stderr = "remove"
 myst_heading_anchors = 3
