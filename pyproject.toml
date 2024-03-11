@@ -20,7 +20,7 @@ source = "vcs"
 bypass-selection = true  # This is not a package
 
 [tool.hatch.envs.default]
-python = "3.11"
+python = "3.12"
 [tool.hatch.envs.default.scripts]
 build = "sphinx-build -M html . ./_build"
 
