@@ -9,6 +9,7 @@
    plotting/core
    plotting/advanced
    integrating-data-using-ingest
+   knn-transformers
    spatial/basic-analysis
    spatial/integration-scanorama
 ..   cite-seq/pbmc5k
