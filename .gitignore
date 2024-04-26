@@ -42,6 +42,8 @@ Thumbs.db
 .ipynb_checkpoints/
 .directory
 /.idea/
+/.vscode/
+/hatch.toml
 
 # always-ignore directories
 /dist/
