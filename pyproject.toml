@@ -21,8 +21,9 @@ bypass-selection = true  # This is not a package
 
 [tool.hatch.envs.default]
 python = "3.12"
+installer = "uv"
 [tool.hatch.envs.default.scripts]
-build = "sphinx-build -M html . ./_build"
+build = "sphinx-build -M html . ./_build {args}"
 
 [tool.ruff]
 extend-exclude = ["scanpy_workshop/"]
