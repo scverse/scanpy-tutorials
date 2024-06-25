@@ -7,8 +7,8 @@ from typing import TYPE_CHECKING, Sequence
 from docutils import nodes
 from sphinx import addnodes
 from sphinx.domains import Domain
-from sphinx.util.docutils import SphinxDirective
 from sphinx.ext.intersphinx import resolve_reference_in_inventory
+from sphinx.util.docutils import SphinxDirective
 
 if TYPE_CHECKING:
     from docutils.parsers.rst.states import Inliner
@@ -78,8 +78,11 @@ def fake_cite(
     options: Mapping[str, object] = MappingProxyType({}),
     content: Sequence[str] = (),
 ) -> tuple[list[nodes.Node], list[str]]:
-    node = inliner.document.reporter.info(f"cite:{text}")
-    return [node], []
+    msg = f"cite:{text}"
+    return [
+        inliner.document.reporter.info(msg),
+        nodes.emphasis(rawtext, f"[{text}]"),
+    ], []
 
 
 class FakeDomain(Domain):
