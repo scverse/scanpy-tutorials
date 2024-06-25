@@ -4,16 +4,16 @@
 .. toctree::
    :maxdepth: 1
 
+   how-to/knn-transformers
    basic-scrna-tutorial
    pbmc3k
-   paga-paul15
-   how-to/knn-transformers
+   integrating-data-using-ingest
    plotting/core
    plotting/advanced
    plotting-with-marsilea
-   integrating-data-using-ingest
    dask
    tutorial_pearson_residuals
    spatial/basic-analysis
    spatial/integration-scanorama
+   paga-paul15
 ..   cite-seq/pbmc5k

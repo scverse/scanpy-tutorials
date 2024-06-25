@@ -102,9 +102,9 @@ class CanonicalTutorial(SphinxDirective):
             addnodes.pending_xref("", reftype="doc", refdomain="std", reftarget=text),
             nodes.inline("", text),
         )
-        assert ref
+        assert ref, f"Reference to scanpy:{text} not found"
         desc = nodes.inline("", "The canonical location for this document is: ")
-        banner = nodes.caution(
+        banner = nodes.danger(
             text,
             nodes.paragraph("", "", desc, ref),
             classes=["admonition", "caution"],
