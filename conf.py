@@ -2,12 +2,12 @@ from collections.abc import Mapping
 from datetime import datetime
 from importlib.metadata import metadata
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Sequence, cast
+from typing import TYPE_CHECKING, Sequence
 
 from docutils import nodes
 from sphinx import addnodes
 from sphinx.domains import Domain
-from sphinx.environment import BuildEnvironment
+from sphinx.util.docutils import SphinxDirective
 from sphinx.ext.intersphinx import resolve_reference_in_inventory
 
 if TYPE_CHECKING:
@@ -90,28 +90,29 @@ class FakeDomain(Domain):
 # Role linking to the canonical location in scanpy’s docs
 
 
-def canonical_tutorial(
-    name: str,
-    rawtext: str,
-    text: str,
-    lineno: int,
-    inliner: Inliner,
-    options: Mapping[str, object] = MappingProxyType({}),
-    content: Sequence[str] = (),
-) -> tuple[list[nodes.Node], list[str]]:
-    env = cast(BuildEnvironment, inliner.document.settings.env)
-    # TODO: do a big banner thing here
-    node = resolve_reference_in_inventory(
-        env,
-        "scanpy",
-        addnodes.pending_xref(text, reftype="doc", refdomain="std", reftarget=text),
-        nodes.inline(rawtext, text),
-    )
-    assert node
-    return [node], []
+class CanonicalTutorial(SphinxDirective):
+    required_arguments = 1
+    has_content = False
+
+    def run(self) -> list[nodes.Node]:
+        text = self.arguments[0]
+        ref = resolve_reference_in_inventory(
+            self.env,
+            "scanpy",
+            addnodes.pending_xref("", reftype="doc", refdomain="std", reftarget=text),
+            nodes.inline("", text),
+        )
+        assert ref
+        desc = nodes.inline("", "The canonical location for this document is: ")
+        banner = nodes.caution(
+            text,
+            nodes.paragraph("", "", desc, ref),
+            classes=["admonition", "caution"],
+        )
+        return [banner]
 
 
 def setup(app: Sphinx) -> None:
     app.add_domain(FakeDomain)
     app.add_role("cite", fake_cite)
-    app.add_role("canonical-tutorial", canonical_tutorial)
+    app.add_directive("canonical-tutorial", CanonicalTutorial)
