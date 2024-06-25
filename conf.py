@@ -45,7 +45,6 @@ pygments_style = "sphinx"
 intersphinx_mapping = dict(
     scanpy=("https://scanpy.readthedocs.io/en/stable/", None),
 )
-intersphinx_disabled_reftypes = []
 # TODO: move images here from scanpy
 suppress_warnings = ["image.not_readable"]
 

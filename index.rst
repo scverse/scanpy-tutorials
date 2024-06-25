@@ -7,12 +7,12 @@
    basic-scrna-tutorial
    pbmc3k
    paga-paul15
+   how-to/knn-transformers
    plotting/core
    plotting/advanced
    plotting-with-marsilea
    integrating-data-using-ingest
    dask
-   knn-transformers
    tutorial_pearson_residuals
    spatial/basic-analysis
    spatial/integration-scanorama
