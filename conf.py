@@ -93,11 +93,22 @@ class FakeDomain(Domain):
 # Role linking to the canonical location in scanpy’s docs
 
 
+MSG = (
+    "Please access this document in its canonical location "
+    "as the currently accessed page may not be rendered correctly"
+)
+
+
 class CanonicalTutorial(SphinxDirective):
     required_arguments = 1
     has_content = False
 
     def run(self) -> list[nodes.Node]:
+        """\
+        Return a banner with a link to the canonical location.
+
+        If the reference cannot be found, crash the build.
+        """
         text = self.arguments[0]
         ref = resolve_reference_in_inventory(
             self.env,
@@ -105,8 +116,10 @@ class CanonicalTutorial(SphinxDirective):
             addnodes.pending_xref("", reftype="doc", refdomain="std", reftarget=text),
             nodes.inline("", text),
         )
-        assert ref, f"Reference to scanpy:{text} not found"
-        desc = nodes.inline("", "The canonical location for this document is: ")
+        if ref is None:
+            msg = f"Reference to scanpy:{text} not found"
+            raise AssertionError(msg)
+        desc = nodes.inline("", f"{MSG}: ")
         banner = nodes.danger(
             text,
             nodes.paragraph("", "", desc, ref),
