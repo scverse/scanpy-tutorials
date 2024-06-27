@@ -1,9 +1,19 @@
+from collections.abc import Mapping
 from datetime import datetime
 from importlib.metadata import metadata
+from types import MappingProxyType
+from typing import TYPE_CHECKING, Sequence
 
-from sphinx.application import Sphinx
-from myst_nb.core.render import NbElementRenderer, MimeData
 from docutils import nodes
+from sphinx import addnodes
+from sphinx.domains import Domain
+from sphinx.ext.intersphinx import resolve_reference_in_inventory
+from sphinx.util.docutils import SphinxDirective
+
+if TYPE_CHECKING:
+    from docutils.parsers.rst.states import Inliner
+    from sphinx.application import Sphinx
+
 
 meta = metadata("scanpy-tutorials")
 project = meta["Name"]
@@ -13,6 +23,7 @@ release = version = meta["Version"]
 
 extensions = [
     "myst_nb",
+    "sphinx.ext.intersphinx",
 ]
 myst_enable_extensions = [
     "colon_fence",
@@ -31,6 +42,12 @@ exclude_patterns = [
 ]
 pygments_style = "sphinx"
 
+intersphinx_mapping = dict(
+    scanpy=("https://scanpy.readthedocs.io/en/stable/", None),
+)
+# TODO: move images here from scanpy
+suppress_warnings = ["image.not_readable"]
+
 # -- Options for HTML output ----------------------------------------------
 
 html_theme = "scanpydoc"
@@ -40,6 +57,7 @@ html_theme_options = dict(
     use_repository_button=True,
 )
 html_static_path = ["_static"]
+html_css_files = ["css/custom.css"]
 html_logo = "_static/img/Scanpy_Logo_BrightFG.svg"
 
 # -- Notebook settings ----------------------------------------------------
@@ -48,30 +66,70 @@ nb_execution_mode = "off"
 nb_output_stderr = "remove"
 myst_heading_anchors = 3
 
-render_image_orig = NbElementRenderer.render_image
+
+# Roles “implementing” {cite}`…` and {cite:p}`…`/{cite:t}`…`
 
 
-def render_image(self: NbElementRenderer, data: MimeData) -> list[nodes.Element]:
-    """Makes images display size default to their jupyter setting.
+def fake_cite(
+    name: str,
+    rawtext: str,
+    text: str,
+    lineno: int,
+    inliner: Inliner,
+    options: Mapping[str, object] = MappingProxyType({}),
+    content: Sequence[str] = (),
+) -> tuple[list[nodes.Node], list[str]]:
+    msg = f"cite:{text}"
+    return [
+        inliner.document.reporter.info(msg),
+        nodes.emphasis(rawtext, f"[{text}]"),
+    ], []
 
-    Workaround for: https://github.com/executablebooks/MyST-NB/issues/522
-    """
-    node_list = render_image_orig(self, data)
-    try:
-        [image] = node_list
-        if not isinstance(image, nodes.image):
-            raise ValueError(f"Expected nodes.image, got {type(image)}")
-        for key in ("width", "height"):
-            if key in image:
-                continue
-            if (v := data.output_metadata.get(data.mime_type, {}).get(key)) is None:
-                continue
-            image[key] = str(v)
-    except Exception:
-        return node_list
-    return [image]
+
+class FakeDomain(Domain):
+    name = "cite"
+    roles = dict(p=fake_cite, t=fake_cite)
+
+
+# Role linking to the canonical location in scanpy’s docs
+
+
+MSG = (
+    "Please access this document in its canonical location "
+    "as the currently accessed page may not be rendered correctly"
+)
+
+
+class CanonicalTutorial(SphinxDirective):
+    required_arguments = 1
+    has_content = False
+
+    def run(self) -> list[nodes.Node]:
+        """\
+        Return a banner with a link to the canonical location.
+
+        If the reference cannot be found, crash the build.
+        """
+        text = self.arguments[0]
+        ref = resolve_reference_in_inventory(
+            self.env,
+            "scanpy",
+            addnodes.pending_xref("", reftype="doc", refdomain="std", reftarget=text),
+            nodes.inline("", text),
+        )
+        if ref is None:
+            msg = f"Reference to scanpy:{text} not found"
+            raise AssertionError(msg)
+        desc = nodes.inline("", f"{MSG}: ")
+        banner = nodes.danger(
+            text,
+            nodes.paragraph("", "", desc, ref),
+            classes=["admonition", "caution"],
+        )
+        return [banner]
 
 
 def setup(app: Sphinx) -> None:
-    if NbElementRenderer.render_image is render_image_orig:
-        NbElementRenderer.render_image = render_image
+    app.add_domain(FakeDomain)
+    app.add_role("cite", fake_cite)
+    app.add_directive("canonical-tutorial", CanonicalTutorial)
