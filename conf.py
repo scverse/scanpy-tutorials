@@ -57,6 +57,7 @@ html_theme_options = dict(
     use_repository_button=True,
 )
 html_static_path = ["_static"]
+html_css_files = ["css/custom.css"]
 html_logo = "_static/img/Scanpy_Logo_BrightFG.svg"
 
 # -- Notebook settings ----------------------------------------------------
