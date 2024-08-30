@@ -5,12 +5,12 @@
    :maxdepth: 1
 
    how-to/knn-transformers
+   how-to/plotting-with-marsilea
    basic-scrna-tutorial
    pbmc3k
    integrating-data-using-ingest
    plotting/core
    plotting/advanced
-   plotting-with-marsilea
    dask
    tutorial_pearson_residuals
    spatial/basic-analysis
