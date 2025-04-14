@@ -7,12 +7,14 @@ from typing import TYPE_CHECKING, Sequence
 from docutils import nodes
 from sphinx import addnodes
 from sphinx.domains import Domain
+from sphinx.errors import NoUri
 from sphinx.ext.intersphinx import resolve_reference_in_inventory
 from sphinx.util.docutils import SphinxDirective
 
 if TYPE_CHECKING:
     from docutils.parsers.rst.states import Inliner
     from sphinx.application import Sphinx
+    from sphinx.environment import BuildEnvironment
 
 
 meta = metadata("scanpy-tutorials")
@@ -43,6 +45,7 @@ exclude_patterns = [
 pygments_style = "sphinx"
 
 intersphinx_mapping = dict(
+    anndata=("https://anndata.readthedocs.io/en/stable/", None),
     scanpy=("https://scanpy.readthedocs.io/en/stable/", None),
 )
 # TODO: move images here from scanpy
@@ -129,7 +132,24 @@ class CanonicalTutorial(SphinxDirective):
         return [banner]
 
 
+def missing_reference(
+    app: Sphinx,
+    env: BuildEnvironment,
+    node: addnodes.pending_xref,
+    contnode: nodes.TextElement,
+) -> nodes.Node | None:
+    # ignore known scanpy labels
+    if node["reftarget"] in {
+        "external-data-integration",
+        "eco-data-integration",
+        "pl-embeddings",
+    } or node["reftarget"].startswith("/tutorials"):
+        raise NoUri
+    return None
+
+
 def setup(app: Sphinx) -> None:
     app.add_domain(FakeDomain)
     app.add_role("cite", fake_cite)
     app.add_directive("canonical-tutorial", CanonicalTutorial)
+    app.connect("missing-reference", missing_reference)

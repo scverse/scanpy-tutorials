@@ -24,6 +24,7 @@ python = "3.12"
 installer = "uv"
 [tool.hatch.envs.default.scripts]
 build = "sphinx-build -M html . ./_build {args}"
+clean = "git clean -fdX _build"
 
 [tool.ruff]
 extend-exclude = ["scanpy_workshop/"]
