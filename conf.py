@@ -68,6 +68,8 @@ html_logo = "_static/img/Scanpy_Logo_BrightFG.svg"
 nb_execution_mode = "off"
 nb_output_stderr = "remove"
 myst_heading_anchors = 3
+# application/vnd.microsoft.datawrangler.viewer.v0+json
+suppress_warnings = ["mystnb.unknown_mime_type"]
 
 
 # Roles “implementing” {cite}`…` and {cite:p}`…`/{cite:t}`…`
