@@ -20,11 +20,19 @@ source = "vcs"
 bypass-selection = true  # This is not a package
 
 [tool.hatch.envs.default]
-python = "3.12"
+python = "3.13"
 installer = "uv"
 [tool.hatch.envs.default.scripts]
 build = "sphinx-build -M html . ./_build {args}"
 clean = "git clean -fdX _build"
+
+[tool.hatch.envs.notebook]
+scripts.install-kernel = "python -m ipykernel install --user --name=scanpy-tutorials --display-name=\"Scanpy Tutorials\""
+extra-dependencies = [
+  "ipykernel",
+  "ipywidgets",
+  "scanpy[skmisc,leiden]",
+]
 
 [tool.ruff]
 extend-exclude = ["scanpy_workshop/"]
