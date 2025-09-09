@@ -1,8 +1,9 @@
-from collections.abc import Mapping
+from __future__ import annotations
+
 from datetime import datetime
 from importlib.metadata import metadata
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Sequence
+from typing import TYPE_CHECKING
 
 from docutils import nodes
 from sphinx import addnodes
@@ -11,7 +12,10 @@ from sphinx.errors import NoUri
 from sphinx.ext.intersphinx import resolve_reference_in_inventory
 from sphinx.util.docutils import SphinxDirective
 
+
 if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
+
     from docutils.parsers.rst.states import Inliner
     from sphinx.application import Sphinx
     from sphinx.environment import BuildEnvironment
@@ -104,8 +108,7 @@ class FakeDomain(Domain):
 
 
 MSG = (
-    "Please access this document in its canonical location "
-    "as the currently accessed page may not be rendered correctly"
+    "Please access this document in its canonical location as the currently accessed page may not be rendered correctly"
 )
 
 

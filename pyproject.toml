@@ -39,14 +39,34 @@ clean = "git clean -fdX _build"
 [tool.hatch.envs.notebook]
 scripts.install-kernel = "python -m ipykernel install --user --name=scanpy-tutorials --display-name=\"Scanpy Tutorials\""
 extra-dependencies = [
+  "dask[distributed]",
   "ipykernel",
   "ipywidgets",
-  "scanpy[skmisc,leiden]",
+  "scanpy[skmisc,leiden,dask]",
+  "pooch",
 ]
 
 [tool.ruff]
 extend-exclude = [ "scanpy_workshop/" ]
+line-length = 120
+lint.select = [ "ALL" ]
 lint.ignore = [
-  "E741", # Fonts these days don’t display I and l in a confusable way
-  "F821", # R cells can sometimes define variables
+  "C408",    # dict() calls are nice
+  "COM812",  # trailing commas handled by black
+  "D203",    # prefer 0 to 1 blank line before class members
+  "D213",    # prefer docstring summary on first line
+  "FIX002",  # “TODO” comments
+  "PLR0913", # having many (kw)args is fine
+  "Q",       # handled by formatter
+  "S",       # no need to worry about security here
 ]
+lint.per-file-ignores.'**/*.ipynb' = [
+  "D",       # no module docstrings for notebooks
+  "F821",    # `%%R -o` means that ruff doesn’t understand which variables exist
+  "PLR2004", # Magic numbers are sadly common
+  "T201",    # Allow print in notebooks
+]
+lint.allowed-confusables = [ "×", "’" ]
+lint.isort.known-first-party = [ "anndata2ri" ]
+lint.isort.lines-after-imports = 2
+lint.isort.required-imports = [ "from __future__ import annotations" ]
