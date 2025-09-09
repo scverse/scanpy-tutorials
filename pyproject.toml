@@ -1,23 +1,33 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [ "hatch-vcs", "hatchling" ]
+
 [project]
 name = "scanpy-tutorials"
-dynamic = ["version"]
 authors = [
-    { name = "Alex Wolf" },
-    { name = "Fidel Ramirez" },
-    { name = "Sergei Rybakov" },
+  { name = "Alex Wolf" },
+  { name = "Fidel Ramirez" },
+  { name = "Sergei Rybakov" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dynamic = [ "version" ]
 dependencies = [
-    "sphinx",
-    "myst-nb",
-    "scanpydoc[theme]>=0.13.4",
+  "myst-nb",
+  "scanpydoc[theme]>=0.13.4",
+  "sphinx",
 ]
 
 [tool.hatch.version]
 source = "vcs"
 
 [tool.hatch.build.targets.wheel]
-bypass-selection = true  # This is not a package
+bypass-selection = true # This is not a package
 
 [tool.hatch.envs.default]
 python = "3.13"
@@ -35,13 +45,8 @@ extra-dependencies = [
 ]
 
 [tool.ruff]
-extend-exclude = ["scanpy_workshop/"]
-[tool.ruff.lint]
-ignore = [
-    "F821",  # R cells can sometimes define variables
-    "E741",  # Fonts these days don’t display I and l in a confusable way
+extend-exclude = [ "scanpy_workshop/" ]
+lint.ignore = [
+  "E741", # Fonts these days don’t display I and l in a confusable way
+  "F821", # R cells can sometimes define variables
 ]
-
-[build-system]
-build-backend = "hatchling.build"
-requires = ["hatchling", "hatch-vcs"]
