@@ -47,8 +47,8 @@ extra-dependencies = [
 ]
 
 [tool.ruff]
-extend-exclude = [ "scanpy_workshop/" ]
 line-length = 120
+extend-exclude = [ "scanpy_workshop/" ]
 lint.select = [ "ALL" ]
 lint.ignore = [
   "C408",    # dict() calls are nice
