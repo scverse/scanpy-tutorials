@@ -5,6 +5,7 @@
    :maxdepth: 1
 
    how-to/knn-transformers
+   how-to/cell-cycle
    how-to/plotting-with-marsilea
    basic-scrna-tutorial
    pbmc3k
