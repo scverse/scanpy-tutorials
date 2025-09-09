@@ -1,0 +1,13 @@
+{
+	"[python]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "always",
+			"source.organizeImports": "always",
+		},
+	},
+	"notebook.formatOnSave.enabled": true,
+	"python.terminal.activateEnvironment": true,
+	"python.analysis.typeCheckingMode": "basic",
+}

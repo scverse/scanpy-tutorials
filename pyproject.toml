@@ -1,39 +1,69 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [ "hatch-vcs", "hatchling" ]
+
 [project]
 name = "scanpy-tutorials"
-dynamic = ["version"]
 authors = [
-    { name = "Alex Wolf" },
-    { name = "Fidel Ramirez" },
-    { name = "Sergei Rybakov" },
+  { name = "Alex Wolf" },
+  { name = "Fidel Ramirez" },
+  { name = "Sergei Rybakov" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dynamic = [ "version" ]
 dependencies = [
-    "sphinx",
-    "myst-nb",
-    "scanpydoc[theme]>=0.13.4",
+  "myst-nb",
+  "scanpydoc[theme]>=0.13.4",
+  "sphinx",
 ]
 
 [tool.hatch.version]
 source = "vcs"
 
 [tool.hatch.build.targets.wheel]
-bypass-selection = true  # This is not a package
+bypass-selection = true # This is not a package
 
 [tool.hatch.envs.default]
-python = "3.12"
+python = "3.13"
 installer = "uv"
 [tool.hatch.envs.default.scripts]
 build = "sphinx-build -M html . ./_build {args}"
 clean = "git clean -fdX _build"
 
-[tool.ruff]
-extend-exclude = ["scanpy_workshop/"]
-[tool.ruff.lint]
-ignore = [
-    "F821",  # R cells can sometimes define variables
-    "E741",  # Fonts these days don’t display I and l in a confusable way
+[tool.hatch.envs.notebook]
+scripts.install-kernel = "python -m ipykernel install --user --name=scanpy-tutorials --display-name=\"Scanpy Tutorials\""
+extra-dependencies = [
+  "dask[distributed]",
+  "ipykernel",
+  "ipywidgets",
+  "scanpy[skmisc,leiden,dask]",
+  "pooch",
 ]
 
-[build-system]
-build-backend = "hatchling.build"
-requires = ["hatchling", "hatch-vcs"]
+[tool.ruff]
+line-length = 120
+extend-exclude = [ "scanpy_workshop/" ]
+lint.select = [ "ALL" ]
+lint.ignore = [
+  "C408",    # dict() calls are nice
+  "COM812",  # trailing commas handled by black
+  "D",       # no module docstrings for notebooks
+  "E741",    # variable names aren’t really ambiguous
+  "F821",    # `%%R -o` means that ruff doesn’t understand which variables exist
+  "FIX002",  # “TODO” comments
+  "PLR0913", # having many (kw)args is fine
+  "PLR2004", # Magic numbers are sadly common
+  "Q",       # handled by formatter
+  "S",       # no need to worry about security here
+  "T201",    # Allow print in notebooks
+]
+lint.allowed-confusables = [ "×", "’", "l" ]
+lint.isort.known-first-party = [ "anndata2ri" ]
+lint.isort.lines-after-imports = 2
+lint.isort.required-imports = [ "from __future__ import annotations" ]
