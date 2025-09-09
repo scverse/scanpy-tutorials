@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from importlib.metadata import metadata
 from types import MappingProxyType
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, ClassVar
 
 from docutils import nodes
 from sphinx import addnodes
@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 meta = metadata("scanpy-tutorials")
 project = meta["Name"]
 author = meta["Author"]
-copyright = f"{datetime.now():%Y}, {author}"
+copyright = f"{datetime.now(UTC):%Y}, {author}"  # noqa: A001
 release = version = meta["Version"]
 
 extensions = [
@@ -52,7 +52,6 @@ intersphinx_mapping = dict(
     anndata=("https://anndata.readthedocs.io/en/stable/", None),
     scanpy=("https://scanpy.readthedocs.io/en/stable/", None),
 )
-# TODO: move images here from scanpy
 suppress_warnings = ["image.not_readable"]
 
 # -- Options for HTML output ----------------------------------------------
@@ -92,6 +91,7 @@ def fake_cite(
     options: Mapping[str, object] = MappingProxyType({}),
     content: Sequence[str] = (),
 ) -> tuple[list[nodes.Node], list[str]]:
+    del name, lineno, options, content
     msg = f"cite:{text}"
     return [
         inliner.document.reporter.info(msg),
@@ -100,8 +100,8 @@ def fake_cite(
 
 
 class FakeDomain(Domain):
-    name = "cite"
-    roles = dict(p=fake_cite, t=fake_cite)
+    name: ClassVar = "cite"
+    roles: ClassVar = dict(p=fake_cite, t=fake_cite)
 
 
 # Role linking to the canonical location in scanpy’s docs
@@ -147,6 +147,7 @@ def missing_reference(
     node: addnodes.pending_xref,
     contnode: nodes.TextElement,
 ) -> nodes.Node | None:
+    del app, env, contnode
     # ignore known scanpy labels
     if node["reftarget"] in {
         "external-data-integration",
