@@ -7,6 +7,7 @@
 			"source.organizeImports": "always",
 		},
 	},
+	"notebook.formatOnSave.enabled": true,
 	"python.terminal.activateEnvironment": true,
 	"python.analysis.typeCheckingMode": "basic",
 }
