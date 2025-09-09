@@ -1,0 +1,14 @@
+{
+	// https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Build docs",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "sphinx",
+			"args": ["-M", "html", ".", "_build"],
+			"console": "internalConsole",
+		},
+	],
+}
