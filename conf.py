@@ -64,8 +64,12 @@ html_theme_options = dict(
     use_repository_button=True,
 )
 html_static_path = ["_static"]
-# include a warning background for everything but PR builds
-html_css_files = ["css/warning.css"] if os.environ.get("READTHEDOCS_VERSION_TYPE") != "external" else []
+# include a warning background on RTD for everything but PR builds
+html_css_files = (
+    ["css/warning.css"]
+    if os.environ.get("READTHEDOCS") and os.environ.get("READTHEDOCS_VERSION_TYPE") != "external"
+    else []
+)
 html_logo = "_static/img/Scanpy_Logo_BrightFG.svg"
 
 # -- Notebook settings ----------------------------------------------------
