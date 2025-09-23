@@ -51,7 +51,7 @@ pygments_style = "sphinx"
 
 intersphinx_mapping = dict(
     anndata=("https://anndata.readthedocs.io/en/stable/", None),
-    scanpy=("https://scanpy.readthedocs.io/en/stable/", None),
+    scanpy=("https://scanpy.readthedocs.io/en/latest/", None),
 )
 suppress_warnings = ["image.not_readable"]
 
