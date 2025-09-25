@@ -40,18 +40,12 @@ templates_path = ["_templates"]
 source_suffix = ".rst"
 master_doc = "index"
 language = "en"
-exclude_patterns = [
-    "_build",
-    "Thumbs.db",
-    ".DS_Store",
-    "**.ipynb_checkpoints",
-    "scanpy_workshop/*",
-]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**.ipynb_checkpoints", "scanpy_workshop", ".*cache"]
 pygments_style = "sphinx"
 
 intersphinx_mapping = dict(
     anndata=("https://anndata.readthedocs.io/en/stable/", None),
-    scanpy=("https://scanpy.readthedocs.io/en/stable/", None),
+    scanpy=("https://scanpy.readthedocs.io/en/latest/", None),
 )
 suppress_warnings = ["image.not_readable"]
 
@@ -137,7 +131,7 @@ class CanonicalTutorial(SphinxDirective):
         )
         if ref is None:
             msg = f"Reference to scanpy:{text} not found"
-            raise AssertionError(msg)
+            raise self.warning(msg)
         desc = nodes.inline("", f"{MSG}: ")
         banner = nodes.danger(
             text,
