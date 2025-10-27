@@ -1,51 +1,22 @@
-_build/
-data*
-results*
-logs*
-_issues.ipynb
-*/figures/*
-figures/*
-data/*
-write/*
-plotting/CD79A.png
+/_build/
+/dist/
+*.h5ad
+*.zip
 
-*.egg-info/
-.pytest_cache/
-.coverage
-cache/
-coverage.xml
-test.h5ad
-test_compr.h5ad
-test_no_compr.h5ad
-docs/_build
-archive/
-data/
-README.html
-scripts/
-test_notebooks.txt
-upload_to_pypi.sh
+/cache/
+/archive/
+/data/
+/write/
+/figures/
+/scripts/
 
-# Ignore biomart file
-.pybiomart.sqlite
-
-# always-ignore extensions
+# caches
 *~
-
-# Python / Byte-compiled / optimized / DLL
 __pycache__/
-*.py[cod]
-*.so
-.cache
+.ipynb_checkpoints/
+.*cache/
 
 # OS or Editor files and folders
 .DS_Store
 Thumbs.db
-.ipynb_checkpoints/
 .directory
-/.idea/
-/.vscode/
-/hatch.toml
-
-# always-ignore directories
-/dist/
-/build/

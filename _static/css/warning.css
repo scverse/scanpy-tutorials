@@ -1,0 +1,15 @@
+body {
+	background-image: repeating-linear-gradient(
+		45deg,
+		var(--pst-color-danger-bg) 0,
+		var(--pst-color-danger-bg) 20px,
+		transparent 20px,
+		transparent 40px
+	);
+}
+
+.bd-sidebar-primary,
+.bd-sidebar-secondary,
+body:not(.scrolled) .bd-header-article {
+	background-color: initial !important;
+}
