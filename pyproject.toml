@@ -22,6 +22,7 @@ dependencies = [
   "myst-nb",
   "scanpydoc[theme]>=0.13.4",
   "sphinx",
+  "sphinx-design",
 ]
 
 [tool.hatch.version]

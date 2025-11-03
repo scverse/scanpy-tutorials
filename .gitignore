@@ -10,6 +10,9 @@
 /figures/
 /scripts/
 
+# example files
+CD79A.png
+
 # caches
 *~
 __pycache__/
