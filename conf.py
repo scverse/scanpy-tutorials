@@ -28,10 +28,7 @@ author = meta["Author"]
 copyright = f"{datetime.now(UTC):%Y}, {author}"  # noqa: A001
 release = version = meta["Version"]
 
-extensions = [
-    "myst_nb",
-    "sphinx.ext.intersphinx",
-]
+extensions = ["myst_nb", "sphinx.ext.intersphinx", "sphinx_design"]
 myst_enable_extensions = [
     "colon_fence",
 ]
