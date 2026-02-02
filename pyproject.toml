@@ -25,9 +25,6 @@ dependencies = [
   "sphinx-design",
 ]
 
-[tool.hatch.version]
-source = "vcs"
-
 [tool.hatch.build.targets.wheel]
 bypass-selection = true # This is not a package
 
@@ -47,6 +44,9 @@ extra-dependencies = [
   "scanpy[skmisc,leiden,dask]",
   "pooch",
 ]
+
+[tool.hatch.version]
+source = "vcs"
 
 [tool.ruff]
 line-length = 120
