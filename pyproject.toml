@@ -25,28 +25,21 @@ dependencies = [
   "sphinx-design",
 ]
 
-[tool.hatch.build.targets.wheel]
-bypass-selection = true # This is not a package
-
-[tool.hatch.envs.default]
-python = "3.13"
-installer = "uv"
-[tool.hatch.envs.default.scripts]
-build = "sphinx-build -M html . ./_build {args}"
-clean = "git clean -fdX _build"
-
-[tool.hatch.envs.notebook]
-scripts.install-kernel = "python -m ipykernel install --user --name=scanpy-tutorials --display-name=\"Scanpy Tutorials\""
-extra-dependencies = [
+[tool.hatch]
+build.targets.wheel.bypass-selection = true  # This is not a package
+envs.default.python = "3.13"
+envs.default.installer = "uv"
+envs.default.scripts.build = "sphinx-build -M html . ./_build {args}"
+envs.default.scripts.clean = "git clean -fdX _build"
+envs.notebook.scripts.install-kernel = "python -m ipykernel install --user --name=scanpy-tutorials --display-name=\"Scanpy Tutorials\""
+envs.notebook.extra-dependencies = [
   "dask[distributed]",
   "ipykernel",
   "ipywidgets",
   "scanpy[skmisc,leiden,dask]",
   "pooch",
 ]
-
-[tool.hatch.version]
-source = "vcs"
+version.source = "vcs"
 
 [tool.ruff]
 line-length = 120
