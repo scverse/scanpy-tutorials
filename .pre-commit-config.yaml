@@ -19,10 +19,10 @@ repos:
         args: ["--fix"]
       - id: ruff-format
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: v2.21.1
+    rev: v2.21.2
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.4.14
+    rev: v2.4.15
     hooks:
       - id: biome-format
