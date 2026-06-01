@@ -26,20 +26,20 @@ dependencies = [
 ]
 
 [tool.hatch]
+version.source = "vcs"
 build.targets.wheel.bypass-selection = true  # This is not a package
 envs.default.python = "3.13"
 envs.default.installer = "uv"
 envs.default.scripts.build = "sphinx-build -M html . ./_build {args}"
 envs.default.scripts.clean = "git clean -fdX _build"
-envs.notebook.scripts.install-kernel = "python -m ipykernel install --user --name=scanpy-tutorials --display-name=\"Scanpy Tutorials\""
 envs.notebook.extra-dependencies = [
   "dask[distributed]",
   "ipykernel",
   "ipywidgets",
-  "scanpy[skmisc,leiden,dask]",
   "pooch",
+  "scanpy[skmisc,leiden,dask]",
 ]
-version.source = "vcs"
+envs.notebook.scripts.install-kernel = "python -m ipykernel install --user --name=scanpy-tutorials --display-name=\"Scanpy Tutorials\""
 
 [tool.ruff]
 line-length = 120
