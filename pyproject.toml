@@ -4,6 +4,7 @@ requires = [ "hatch-vcs", "hatchling" ]
 
 [project]
 name = "scanpy-tutorials"
+license = "BSD-3-Clause"
 authors = [
   { name = "Alex Wolf" },
   { name = "Fidel Ramirez" },
@@ -48,6 +49,7 @@ lint.select = [ "ALL" ]
 lint.ignore = [
   "C408",    # dict() calls are nice
   "COM812",  # trailing commas handled by black
+  "CPY001",  # no need for clause with BSD 3 license
   "D",       # no module docstrings for notebooks
   "E741",    # variable names aren’t really ambiguous
   "F821",    # `%%R -o` means that ruff doesn’t understand which variables exist

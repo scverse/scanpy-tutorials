@@ -79,7 +79,7 @@ suppress_warnings = [
 # Roles “implementing” {cite}`…` and {cite:p}`…`/{cite:t}`…`
 
 
-def fake_cite(
+def fake_cite(  # noqa: PLR0917
     name: str,
     rawtext: str,
     text: str,
